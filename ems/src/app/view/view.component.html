@@ -1,0 +1,23 @@
+<table class='table'>
+    <thead class='thead-dark'>
+      <tr>
+        <th *ngFor="let col of displayedColumns">
+            {{col}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{emp.id}}</td>
+        <td>{{emp.fname}}</td>
+        <td>{{emp.lname}}</td>
+        <td>{{emp.edu}}</td>
+        <td>{{emp.phone}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.exper}}</td>
+        <td>{{emp.ss}}</td>
+        <td><button mat-raised-button color="warn" (click)="edit(emp._id)"><span class="material-icons">create</span></button></td>
+        <td><button mat-raised-button color="warn" (click)="delete(emp._id)"><span class="material-icons">delete</span></button></td>
+      </tr>
+    </tbody>
+</table>

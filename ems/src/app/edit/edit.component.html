@@ -1,0 +1,68 @@
+<div style="padding-left: 20%;font-size: 12px;padding-top: 3%;">
+    <form novalidate class="example-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit(_id)">
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>EmployeeId</mat-label>
+                        <mat-icon matSuffix><span class="material-icons">person</span></mat-icon>
+                        <input matInput formControlName="id" type="text" placeholder="EmployeeId" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>FirstName</mat-label>
+                    <input matInput type="text" formControlName="fname" placeholder="FirstName" required>
+                </mat-form-field></td>
+                <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>LastName</mat-label>
+                    <input matInput type="text" formControlName="lname" placeholder="LastName" required>
+                </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Education</mat-label>
+                    <mat-icon matSuffix><span class="material-icons">school</span></mat-icon>
+                    <input matInput type="text" formControlName="edu" placeholder="Education" required>
+                </mat-form-field></td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <input matInput type="tel" formControlName="phone" placeholder="PhoneNo" required>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <mat-icon matSuffix><span class="material-icons">email</span></mat-icon>
+                        <input matInput type="email" formControlName="email" placeholder="email" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>
+                    Experience
+                </mat-label>
+                <input matInput type="text" formControlName="exper" placeholder="Experience" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>
+                    Salary
+                </mat-label>
+                <input matInput type="text" formControlName="ss" placeholder="Salary" required>
+            </mat-form-field>
+        </p>
+        <button type="submit" mat-raised-button color="primary" [disabled]="employeeForm.invalid">Submit</button>
+    </form>
+</div>
