@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "ems"
+  "defaultProject": "ems",
+  "cli": {
+    "analytics": false
+  }
 }

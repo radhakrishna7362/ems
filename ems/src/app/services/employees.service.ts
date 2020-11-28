@@ -11,8 +11,8 @@ export class EmployeesService {
   constructor(private http:HttpClient) {
   }
 
-  getRecords(){
-    return this.http.get(`${this.uri}/employees`);
+  getRecords(id){
+    return this.http.get(`${this.uri}/employees/${id}`);
   }
 
   addRecord(student) {
@@ -24,7 +24,7 @@ export class EmployeesService {
   }
 
   getRecordById(id){
-    return this.http.get(`${this.uri}/employees/${id}`);
+    return this.http.get(`${this.uri}/employees/employee/${id}`);
   }
 
   updateRecord(id,student){

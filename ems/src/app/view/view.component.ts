@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import {emp} from '../employee/employee.component';
 import {EmployeesService} from '../services/employees.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import { employee } from '../shared/employee';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-view',
@@ -11,9 +10,10 @@ import { employee } from '../shared/employee';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  displayedColumns=['EmployeeId','FirstName','LastName','Education','Phone','Email','Experience','Salary','Edit','Delete'];
-  employees:employee[];
-  constructor(private employeesService:EmployeesService,private router:Router,private snackBar: MatSnackBar) { 
+  displayedColumns=['EmployeeId','FirstName','LastName','Education','Salary','Phone','Email','Experience','Last Updated','Edit','Delete'];
+  employees=[]
+  length
+  constructor(private employeesService:EmployeesService,private router:Router,private snackBar: MatSnackBar,private authService:AuthService) { 
     this.fetchRecords();
   }
 
@@ -22,10 +22,14 @@ export class ViewComponent implements OnInit {
   }
 
   fetchRecords(){
-    this.employeesService.getRecords().subscribe((data:employee[])=>{
-      this.employees=data;
-      console.log(this.employees)
-    });
+    this.authService.getUserId().subscribe(
+      (res)=>{
+        this.employeesService.getRecords(res).subscribe((data:any[])=>{
+          this.employees=data;
+          this.length=this.employees.length
+          console.log(this.employees)
+        });
+      });
   }
   delete(id){
     console.log(id)

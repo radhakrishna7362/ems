@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    text-align: center;
+}
+  
+tr.mat-footer-row {
+    font-weight: bold;
+}
+
+th.mat-header-cell {
+    font-weight: bold;
+    text-align: center;
+}
+
+.title{
+    font-family: "Cera Pro", "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: #0f346c;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.view-all:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px #871A1A;
+}
+
+.view-all{
+    transition: 0.5s ease;
+}

@@ -32,6 +32,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -40,7 +42,9 @@ import {MatMenuModule} from '@angular/material/menu';
     AppComponent,
     EmployeeComponent,
     ViewComponent,
-    EditComponent
+    EditComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule,

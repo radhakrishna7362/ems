@@ -1,0 +1,46 @@
+<div fxLayout="row" fxLayoutAlign="center" class="login-card">
+    <mat-card class="example-card">
+      <mat-toolbar class="title">
+        Register
+      </mat-toolbar>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+          <mat-icon>
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+          </mat-icon>
+          <mat-form-field class="example">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" [formControl]="registerData.name" placeholder="Name" required>
+            <mat-error *ngIf="registerData.name.invalid">{{getMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+          <mat-icon>
+            <span class="material-icons">email</span>
+          </mat-icon>
+          <mat-form-field class="example">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" [formControl]="registerData.email" placeholder="Email" required>
+            <mat-error *ngIf="registerData.email.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+          <mat-icon>
+            <span class="material-icons">vpn_key</span>
+          </mat-icon>
+          <mat-form-field class="example">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="registerData.password" placeholder="Password" required> 
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="registerData.password.invalid">{{getError()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <p style="cursor: pointer;outline:none">Already a User in MealMate?<a href="" routerLink="/login">Click here to login</a></p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <button mat-raised-button (click)="registerUser()" [disabled]="registerData.password.invalid || registerData.name.invalid || registerData.email.invalid" class="example-button">Register</button>
+      </div>
+    </mat-card>
+  </div>

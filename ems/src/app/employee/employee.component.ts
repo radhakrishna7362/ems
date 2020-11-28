@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {employee} from '../shared/employee';
 import {Router} from '@angular/router'
-import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import {FormControl,Validators} from '@angular/forms';
 import { EmployeesService } from '../services/employees.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-employee',
@@ -11,45 +11,107 @@ import { EmployeesService } from '../services/employees.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  employeeForm:FormGroup;
-  emp:employee;
-  constructor(private fb:FormBuilder,private router:Router,private employeesService:EmployeesService) {
+  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null}
+  constructor(private authService:AuthService,private router:Router,private employeesService:EmployeesService) {
     
   }
 
-  ngOnInit(): void {
-    this.createForm();
+  formData={
+    id:new FormControl('',[Validators.required]),
+    fname:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    lname:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    edu:new FormControl('',[Validators.required]),
+    salary:new FormControl('',[Validators.required]),
+    exper:new FormControl('',[Validators.required]),
+    phone:new FormControl('',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+    email:new FormControl('',[Validators.required,Validators.email]),
   }
 
-  createForm(){
-    this.employeeForm=this.fb.group({
-      id:['',[Validators.required]],
-      fname:['',[Validators.required]],
-      lname:['',[Validators.required]],
-      edu:['',[Validators.required]],
-      phone:['',[Validators.required]],
-      email:['',[Validators.required]],
-      exper:['',[Validators.required]],
-      ss:['',[Validators.required]]
-    });
+  Error() {
+    if (this.formData.id.hasError('required')) {
+      return 'Employee Id is required';
+    }
+  }
+
+  getErrorMessage() {
+    if (this.formData.fname.hasError('required')) {
+      return 'First Name is required';
+    }
+    else if(this.formData.fname.hasError('minlength')){
+      return 'First Name must be a minimum length of 2';
+    }
+  }
+
+  getMsg(){
+    if (this.formData.lname.hasError('required')) {
+      return 'Last Name is required';
+    }
+    else if(this.formData.lname.hasError('minlength')){
+      return 'Last Name must be a minimum length of 2';
+    }
+  }
+
+  Msg(){
+    if (this.formData.salary.hasError('required')) {
+      return 'Salary is required';
+    }
+  }
+
+  err() {
+    if (this.formData.edu.hasError('required')) {
+      return 'Education is required';
+    }
+  }
+
+  msg(){
+    if (this.formData.exper.hasError('required')) {
+      return 'Experience is required';
+    }
+  }
+
+  ErrMsg(){
+    if (this.formData.phone.hasError('required')) {
+      return 'Mobile no is required';
+    }
+    else if(this.formData.phone.hasError('minlength')){
+      return 'Mobile no. must be 10 digits';
+    }
+    else if(this.formData.phone.hasError('maxlength')){
+      return 'Mobile no. must be 10 digits';
+    }
+  }
+
+  getError(){
+    if (this.formData.email.hasError('required')) {
+      return 'Email is required';
+    }
+    else if(this.formData.email.hasError('email')){
+      return 'Email must be a valid email Address';
+    }
+  }
+
+  ngOnInit(): void {
+    this.authService.getUserId().subscribe(
+      (res)=>{
+        this.form.userid=res;
+      }
+    )
   }
 
   onSubmit(){
-    this.emp=this.employeeForm.value;
-    console.log(this.emp);
-    this.employeesService.addRecord(this.emp).subscribe();
-    this.emp = null;
-    this.employeeForm.reset({
-      id:'',
-      name:'',
-      edu:'',
-      phone:'',
-      email:'',
-      exper:'',
-      ss:''
-    });
-    this.router.navigate(['/view']);
+    this.form.id=this.formData.id.value;
+    this.form.fname=this.formData.fname.value;
+    this.form.lname=this.formData.lname.value;
+    this.form.salary=this.formData.salary.value;
+    this.form.edu=this.formData.edu.value;
+    this.form.exper=this.formData.exper.value;
+    this.form.phone=this.formData.phone.value;
+    this.form.email=this.formData.email.value;
+    this.employeesService.addRecord(this.form).subscribe(
+      (res)=>{
+        this.router.navigate(['/view'])
+      }
+    );
   }
-}
 
-// export const emp:employee[] = [];
+}

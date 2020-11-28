@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { EmployeesService } from '../services/employees.service';
-import { employee } from '../shared/employee';
 
 @Component({
   selector: 'app-edit',
@@ -12,56 +12,122 @@ import { employee } from '../shared/employee';
 })
 export class EditComponent implements OnInit {
 
-  employeeForm:FormGroup;
-  employe;
-  newemployee;
-  _id;
-  constructor(private router:ActivatedRoute,
-    private fb:FormBuilder,
-    private snackbar:MatSnackBar,
-    private route:Router,
-    private employeesService:EmployeesService) { }
+  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null}
+  constructor(private authService:AuthService,private _router:Router,private employeesService:EmployeesService,private router:ActivatedRoute,private snackbar:MatSnackBar) {
+    
+  }
 
-    ngOnInit(): void {
-      this.router.params.subscribe((params)=>{
-        this._id=params.id;
-        this.employeesService.getRecordById(this._id).subscribe((data:employee)=>{
-          this.employe=data;
-          console.log(data)
-          this.employeeForm.get('id').setValue(this.employe.id);
-          this.employeeForm.get('fname').setValue(this.employe.fname);
-          this.employeeForm.get('lname').setValue(this.employe.lname);
-          this.employeeForm.get('edu').setValue(this.employe.edu);
-          this.employeeForm.get('email').setValue(this.employe.email);
-          this.employeeForm.get('phone').setValue(this.employe.phone);
-          this.employeeForm.get('exper').setValue(this.employe.exper);
-          this.employeeForm.get('ss').setValue(this.employe.ss);
-        })
-      });
-      this.createForm();
-    }
-  
-    createForm(){
-      this.employeeForm=this.fb.group({
-        id:['',[Validators.required]],
-        fname:['',[Validators.required]],
-        lname:['',[Validators.required]],
-        edu:['',[Validators.required]],
-        phone:['',[Validators.required]],
-        email:['',[Validators.required]],
-        exper:['',[Validators.required]],
-        ss:['',[Validators.required]]
-      });
-    }
+  formData={
+    id:new FormControl('',[Validators.required]),
+    fname:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    lname:new FormControl('',[Validators.required,Validators.minLength(2)]),
+    edu:new FormControl('',[Validators.required]),
+    salary:new FormControl('',[Validators.required]),
+    exper:new FormControl('',[Validators.required]),
+    phone:new FormControl('',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
+    email:new FormControl('',[Validators.required,Validators.email]),
+  }
 
-    onSubmit(id){
-      this.newemployee=this.employeeForm.value;
-      console.log(this.newemployee);
-      this.employeesService.updateRecord(id,this.newemployee).subscribe(() => {
-        this.snackbar.open('Employee Updated !!', 'OK', {
-          duration: 3000,
+  Error() {
+    if (this.formData.id.hasError('required')) {
+      return 'Employee Id is required';
+    }
+  }
+
+  getErrorMessage() {
+    if (this.formData.fname.hasError('required')) {
+      return 'First Name is required';
+    }
+    else if(this.formData.fname.hasError('minlength')){
+      return 'First Name must be a minimum length of 2';
+    }
+  }
+
+  getMsg(){
+    if (this.formData.lname.hasError('required')) {
+      return 'Last Name is required';
+    }
+    else if(this.formData.lname.hasError('minlength')){
+      return 'Last Name must be a minimum length of 2';
+    }
+  }
+
+  Msg(){
+    if (this.formData.salary.hasError('required')) {
+      return 'Salary is required';
+    }
+  }
+
+  err() {
+    if (this.formData.edu.hasError('required')) {
+      return 'Education is required';
+    }
+  }
+
+  msg(){
+    if (this.formData.exper.hasError('required')) {
+      return 'Experience is required';
+    }
+  }
+
+  ErrMsg(){
+    if (this.formData.phone.hasError('required')) {
+      return 'Mobile no is required';
+    }
+    else if(this.formData.phone.hasError('minlength')){
+      return 'Mobile no. must be 10 digits';
+    }
+    else if(this.formData.phone.hasError('maxlength')){
+      return 'Mobile no. must be 10 digits';
+    }
+  }
+
+  getError(){
+    if (this.formData.email.hasError('required')) {
+      return 'Email is required';
+    }
+    else if(this.formData.email.hasError('email')){
+      return 'Email must be a valid email Address';
+    }
+  }
+
+  _id
+
+  ngOnInit(): void {
+    this.authService.getUserId().subscribe(
+      (res)=>{
+        this.form.userid=res;
+        this.router.params.subscribe((params)=>{
+          this._id=params.id;
+          this.employeesService.getRecordById(this._id).subscribe((data:any)=>{
+            this.formData.id.setValue(data.id);
+            this.formData.fname.setValue(data.fname);
+            this.formData.lname.setValue(data.lname);
+            this.formData.edu.setValue(data.edu);
+            this.formData.salary.setValue(data.salary);
+            this.formData.exper.setValue(data.exper);
+            this.formData.phone.setValue(data.phone);
+            this.formData.email.setValue(data.email);
+          })
         });
+      }
+    )
+  }
+
+  onSubmit(){
+    this.form.id=this.formData.id.value;
+    this.form.fname=this.formData.fname.value;
+    this.form.lname=this.formData.lname.value;
+    this.form.salary=this.formData.salary.value;
+    this.form.edu=this.formData.edu.value;
+    this.form.exper=this.formData.exper.value;
+    this.form.phone=this.formData.phone.value;
+    this.form.email=this.formData.email.value;
+    this.employeesService.updateRecord(this._id,this.form).subscribe(() => {
+      this.snackbar.open('Employee Updated !!', 'OK', {
+        duration: 3000,
       });
-      this.route.navigate(['/view']);
-    }
+    });
+    this._router.navigate(['/view']);
+  }
 }

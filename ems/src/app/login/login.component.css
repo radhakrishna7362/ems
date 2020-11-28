@@ -1,5 +1,5 @@
 .example-card {
-    width: 600px;
+    width: 350px;
     padding: 0;
     margin: 0;
 }
@@ -15,8 +15,8 @@
 
 .title{
     font-family: "Cera Pro", "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-    font-weight: 600;
-    font-size: 23px;
+    font-weight: 700;
+    font-size: 30px;
     color: #0f346c;
     letter-spacing: 0.1em;
     background-color: rgb(241, 156, 28);
@@ -28,9 +28,10 @@
     margin: 5px;
     font-weight: bold;
     letter-spacing: 0.1em;
-    background-color: rgb(241, 156, 28);
     justify-content: center;
     width: 100px;
+    background-color: rgb(241, 156, 28);
+    color: white;
     outline: none;
     transition: 0.5s ease;
 }
