@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  displayedColumns=['EmployeeId','FirstName','LastName','Education','Salary','Phone','Email','Experience','Last Updated','Edit','Delete'];
+  displayedColumns=['EmployeeId','FirstName','LastName','Education','Salary','Phone','Email','Experience','Last Updated','Edit','Delete','View'];
   employees=[]
   length
   constructor(private employeesService:EmployeesService,private router:Router,private snackBar: MatSnackBar,private authService:AuthService) { 
@@ -42,5 +42,8 @@ export class ViewComponent implements OnInit {
   }
   edit(id){
     this.router.navigate([`edit/${id}`]);
+  }
+  view(id){
+    this.router.navigate([`view/${id}`]);
   }
 }

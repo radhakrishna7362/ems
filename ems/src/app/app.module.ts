@@ -34,6 +34,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
 
 
@@ -44,7 +45,8 @@ import { RegisterComponent } from './register/register.component';
     ViewComponent,
     EditComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     HttpClientModule,
