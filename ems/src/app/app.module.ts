@@ -7,9 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeeComponent } from './employee/employee.component';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
-import { EmployeesService } from './services/employees.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
-import {HttpClientModule} from '@angular/common/http';
+
+import { EmployeesService } from './services/employees.service';
+import {TokenInterceptorService} from './services/token-interceptor.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './auth.guard';
+
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
@@ -32,11 +41,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ViewEmployeeComponent } from './view-employee/view-employee.component';
-
-
 
 @NgModule({
   declarations: [
@@ -77,7 +81,11 @@ import { ViewEmployeeComponent } from './view-employee/view-employee.component';
     MatTableModule,
     MatMenuModule
   ],
-  providers: [EmployeesService],
+  providers: [EmployeesService,AuthService,AuthGuard,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

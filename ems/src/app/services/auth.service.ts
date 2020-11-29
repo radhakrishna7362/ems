@@ -8,18 +8,17 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService {
 
-  url='http://localhost:4000';
   constructor(private http: HttpClient) { }
 
     invokeAppComponent=new EventEmitter();
     subsVar:Subscription;
 
     registerUser(user) {
-      return this.http.post<any>(`${this.url}/user/register`, user)
+      return this.http.post<any>(`/user/register`, user)
     }
   
     loginUser(user) {
-      return this.http.post<any>(`${this.url}/user/login`, user)
+      return this.http.post<any>(`/user/login`, user)
     }
   
     logoutUser() {
@@ -39,12 +38,12 @@ export class AuthService {
     }
 
     getUserId(){
-      return this.http.get(`${this.url}/user/userid`,{
+      return this.http.get(`/user/userid`,{
         params:new HttpParams().append('token',localStorage.getItem('token'))
       })
     }
 
     getUserName(id){
-      return this.http.get(`${this.url}/user/username/${id}`)
+      return this.http.get(`/user/username/${id}`)
     }
 }
