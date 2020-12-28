@@ -1,5 +1,5 @@
 table {
-    width: 100%;
+    width: 90%;
     text-align: center;
 }
   
@@ -11,6 +11,8 @@ th.mat-header-cell {
     font-size: medium;
     font-weight: bolder;
     text-align: center;
+    color: white;
+    background-color: rgba(0, 38, 255, 0.726);
 }
 
 .title{

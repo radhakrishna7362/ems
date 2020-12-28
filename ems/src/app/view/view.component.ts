@@ -10,9 +10,11 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-  displayedColumns=['EmployeeId','FirstName','LastName','Education','Salary','Phone','Email','Experience','Last Updated','Edit','Delete','View'];
+  displayedColumns=['EmployeeId','Name','Phone','Email','Education','Last Updated','Edit','Delete','View'];
   employees=[]
   length
+  List=[]
+  name:String;
   constructor(private employeesService:EmployeesService,private router:Router,private snackBar: MatSnackBar,private authService:AuthService) { 
     this.fetchRecords();
   }
@@ -25,9 +27,10 @@ export class ViewComponent implements OnInit {
     this.authService.getUserId().subscribe(
       (res)=>{
         this.employeesService.getRecords(res).subscribe((data:any[])=>{
-          this.employees=data;
+          this.List=data;
+          this.employees=this.List;
           this.length=this.employees.length
-          console.log(this.employees)
+          console.log(this.List)
         });
       });
   }
@@ -45,5 +48,17 @@ export class ViewComponent implements OnInit {
   }
   view(id){
     this.router.navigate([`view/${id}`]);
+  }
+
+  Search(){
+    if(this.name != ""){
+      this.employees = this.List.filter(res=>{
+        return res.id.match(this.name);
+      });
+      this.length=this.employees.length;
+    }
+    else if(this.name == ""){
+     this.ngOnInit();
+    }
   }
 }

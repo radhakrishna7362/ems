@@ -12,7 +12,7 @@ import { EmployeesService } from '../services/employees.service';
 })
 export class EditComponent implements OnInit {
 
-  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null}
+  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null,address:null,department:null}
   constructor(private authService:AuthService,private _router:Router,private employeesService:EmployeesService,private router:ActivatedRoute,private snackbar:MatSnackBar) {
     
   }
@@ -26,6 +26,8 @@ export class EditComponent implements OnInit {
     exper:new FormControl('',[Validators.required]),
     phone:new FormControl('',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
     email:new FormControl('',[Validators.required,Validators.email]),
+    address:new FormControl('',[Validators.required]),
+    department:new FormControl('',[Validators.required])
   }
 
   Error() {
@@ -70,6 +72,18 @@ export class EditComponent implements OnInit {
     }
   }
 
+  Deperr() {
+    if (this.formData.department.hasError('required')) {
+      return 'Department is required';
+    }
+  }
+
+  addressMsg(){
+    if (this.formData.address.hasError('required')) {
+      return 'Address is required';
+    }
+  }
+
   ErrMsg(){
     if (this.formData.phone.hasError('required')) {
       return 'Mobile no is required';
@@ -108,6 +122,8 @@ export class EditComponent implements OnInit {
             this.formData.exper.setValue(data.exper);
             this.formData.phone.setValue(data.phone);
             this.formData.email.setValue(data.email);
+            this.formData.address.setValue(data.address);
+            this.formData.department.setValue(data.department);
           })
         });
       }
@@ -123,6 +139,8 @@ export class EditComponent implements OnInit {
     this.form.exper=this.formData.exper.value;
     this.form.phone=this.formData.phone.value;
     this.form.email=this.formData.email.value;
+    this.form.department=this.formData.department.value;
+    this.form.address=this.formData.address.value;
     this.employeesService.updateRecord(this._id,this.form).subscribe(() => {
       this.snackbar.open('Employee Updated !!', 'OK', {
         duration: 3000,

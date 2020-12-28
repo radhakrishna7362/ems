@@ -2,6 +2,18 @@
     width: 600px;
     padding: 0;
     margin: 0;
+    margin-bottom: 10px;
+}
+
+.example-button{
+    margin: 5px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    background-color: rgb(241, 156, 28);
+    justify-content: center;
+    width: 100px;
+    outline: none;
+    transition: 0.5s ease;
 }
 
 .example{

@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null}
+  form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null,address:null,department:null}
   constructor(private authService:AuthService,private router:Router,private employeesService:EmployeesService) {
     
   }
@@ -25,6 +25,8 @@ export class EmployeeComponent implements OnInit {
     exper:new FormControl('',[Validators.required]),
     phone:new FormControl('',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
     email:new FormControl('',[Validators.required,Validators.email]),
+    address:new FormControl('',[Validators.required]),
+    department:new FormControl('',[Validators.required])
   }
 
   Error() {
@@ -59,13 +61,25 @@ export class EmployeeComponent implements OnInit {
 
   err() {
     if (this.formData.edu.hasError('required')) {
-      return 'Education is required';
+      return 'Qualification is required';
+    }
+  }
+
+  Deperr() {
+    if (this.formData.department.hasError('required')) {
+      return 'Department is required';
     }
   }
 
   msg(){
     if (this.formData.exper.hasError('required')) {
       return 'Experience is required';
+    }
+  }
+
+  addressMsg(){
+    if (this.formData.address.hasError('required')) {
+      return 'Address is required';
     }
   }
 
@@ -107,6 +121,8 @@ export class EmployeeComponent implements OnInit {
     this.form.exper=this.formData.exper.value;
     this.form.phone=this.formData.phone.value;
     this.form.email=this.formData.email.value;
+    this.form.department=this.formData.department.value;
+    this.form.address=this.formData.address.value;
     this.employeesService.addRecord(this.form).subscribe(
       (res)=>{
         this.router.navigate(['/view'])

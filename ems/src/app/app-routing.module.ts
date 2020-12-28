@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'view',component:ViewComponent,canActivate: [AuthGuard]},
   {path:'edit/:id',component:EditComponent,canActivate: [AuthGuard]},
   {path:'view/:id',component:ViewEmployeeComponent,canActivate: [AuthGuard]},
-  {path:'',redirectTo:'employees',pathMatch:'full'}
+  {path:'',redirectTo:'view',pathMatch:'full'}
 ];
 
 @NgModule({

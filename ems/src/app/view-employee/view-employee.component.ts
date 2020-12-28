@@ -22,6 +22,8 @@ export class ViewEmployeeComponent implements OnInit {
     exper:new FormControl('',[Validators.required]),
     phone:new FormControl('',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]),
     email:new FormControl('',[Validators.required,Validators.email]),
+    address:new FormControl('',[Validators.required]),
+    department:new FormControl('',[Validators.required])
   }
 
 
@@ -37,6 +39,8 @@ export class ViewEmployeeComponent implements OnInit {
         this.formData.exper.setValue(data.exper);
         this.formData.phone.setValue(data.phone);
         this.formData.email.setValue(data.email);
+        this.formData.address.setValue(data.address);
+        this.formData.department.setValue(data.department);
       })
     });
   }

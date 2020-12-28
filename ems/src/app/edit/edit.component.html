@@ -39,11 +39,11 @@
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
                 <div>
                     <mat-form-field class="example">
-                        <mat-label>Education</mat-label>
+                        <mat-label>Highest Qualification</mat-label>
                         <mat-icon matSuffix>
                             <span class="material-icons">school</span>
                         </mat-icon>
-                        <input matInput type="text" [formControl]="formData.edu" placeholder="Education" required>
+                        <input matInput type="text" [formControl]="formData.edu" placeholder="Highest Qualification" required>
                         <mat-error *ngIf="formData.edu.invalid">{{err()}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -82,16 +82,36 @@
             </div>
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
                 <mat-form-field class="example">
-                    <mat-label>Experience</mat-label>
-                    <mat-icon matSuffix>
-                      <span class="material-icons">feedback</span>
-                    </mat-icon>
-                    <textarea matInput type="text" [formControl]="formData.exper" placeholder="Experience" required></textarea>
-                    <mat-error *ngIf="formData.exper.invalid">{{msg()}}</mat-error>
+                    <mat-label>Department</mat-label>
+                    <input matInput type="text" [formControl]="formData.department" placeholder="Department" required>
+                    <mat-error *ngIf="formData.department.invalid">{{Deperr()}}</mat-error>
                 </mat-form-field>
+            </div>
+            <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
+                <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
+                    <mat-form-field class="example">
+                        <mat-label>Address</mat-label>
+                        <mat-icon matSuffix>
+                          <span class="material-icons">place</span>
+                        </mat-icon>
+                        <textarea matInput type="text" [formControl]="formData.address" placeholder="Experience" required></textarea>
+                        <mat-error *ngIf="formData.exper.invalid">{{addressMsg()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
+                    <mat-form-field class="example">
+                        <mat-label>Experience</mat-label>
+                        <mat-icon matSuffix>
+                          <span class="material-icons">feedback</span>
+                        </mat-icon>
+                        <textarea matInput type="text" [formControl]="formData.exper" placeholder="Experience" required></textarea>
+                        <mat-error *ngIf="formData.exper.invalid">{{msg()}}</mat-error>
+                    </mat-form-field>
+                </div>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="center">
+            <button mat-raised-button class="example-button" routerLink='/view'>Back</button>
             <button mat-raised-button (click)="onSubmit()" [disabled]="formData.fname.invalid || formData.lname.invalid || formData.id.invalid || formData.edu.invalid || formData.exper.invalid || formData.salary.invalid || formData.phone.invalid || formData.email.invalid" class="example-button">Submit</button>
           </div>
     </mat-card>

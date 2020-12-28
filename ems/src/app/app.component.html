@@ -1,15 +1,4 @@
 <mat-toolbar style="background-color: #871a1a;">
-  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon style="color: aliceblue;outline: none;">menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/employees']" routerLinkActive="active">
-      <span style="font-family: 'Times New Roman', Times, serif;font-size: large;outline: none;font-weight: bold;">Home</span>
-    </button>
-    <button mat-menu-item [routerLink]="['/view']" routerLinkActive="active">
-      <span style="font-family: 'Times New Roman', Times, serif;font-size: large;outline: none;font-weight: bold;">Employees</span>
-    </button>
-  </mat-menu>
   <span style="text-align: center; flex: auto 1 1;color: white;font-style: normal;font-size: larger;">
     Employee Managment System
   </span>
