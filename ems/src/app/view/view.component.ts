@@ -53,7 +53,7 @@ export class ViewComponent implements OnInit {
   Search(){
     if(this.name != ""){
       this.employees = this.List.filter(res=>{
-        return res.id.match(this.name);
+        return res.id.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
       });
       this.length=this.employees.length;
     }

@@ -27,7 +27,7 @@
             <mat-error *ngIf="loginUserData.password.invalid">{{getError()}}</mat-error>
           </mat-form-field>
         </div>
-        <p style="cursor: pointer;outline:none">New to MealMate?<a href="" routerLink="/register">Create an account</a></p>
+        <p style="cursor: pointer;outline:none">New to EMS?<a href="" routerLink="/register">Create an account</a></p>
       </div>
       <div fxLayout="row" fxLayoutAlign="center" style="margin-bottom: 5px;">
         <button mat-raised-button (click)="loginUser()" [disabled]="loginUserData.password.invalid || loginUserData.email.invalid" class="example-button">Login</button>

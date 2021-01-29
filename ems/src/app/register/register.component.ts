@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
           duration: 3000,
         });
         localStorage.setItem('token', res.token)
-        this._router.navigate(['/employees'])
+        this._router.navigate(['/view'])
       },
       err => {
         if( err instanceof HttpErrorResponse ) {

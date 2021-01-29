@@ -16,11 +16,11 @@
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
                 <div>
                     <mat-form-field class="example">
-                        <mat-label>Fisrt Name</mat-label>
+                        <mat-label>First Name</mat-label>
                         <mat-icon matSuffix>
                             <i class="fa fa-user-circle" aria-hidden="true"></i>
                         </mat-icon>
-                        <input matInput type="text" [formControl]="formData.fname" placeholder="Fisrt Name" readonly>
+                        <input matInput type="text" [formControl]="formData.fname" placeholder="First Name" readonly>
                     </mat-form-field>
                 </div>
                 <div>
@@ -49,7 +49,7 @@
                         <mat-icon matSuffix>
                             <span class="material-icons">monetization_on</span>
                         </mat-icon>
-                        <input matInput type="text" [formControl]="formData.salary" placeholder="Salary" readonly>
+                        <input matInput type="number" [formControl]="formData.salary" placeholder="Salary" readonly>
                     </mat-form-field>
                 </div>
             </div>
@@ -76,7 +76,7 @@
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
                 <mat-form-field class="example">
                     <mat-label>Department</mat-label>
-                    <input matInput type="text" [formControl]="formData.department" placeholder="Department" required>
+                    <input matInput type="text" [formControl]="formData.department" placeholder="Department" readonly>
                 </mat-form-field>
             </div>
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
@@ -86,7 +86,7 @@
                         <mat-icon matSuffix>
                           <span class="material-icons">place</span>
                         </mat-icon>
-                        <textarea matInput type="text" [formControl]="formData.address" placeholder="Experience" required></textarea>
+                        <textarea matInput type="text" [formControl]="formData.address" placeholder="Experience" readonly></textarea>
                     </mat-form-field>
                 </div>
                 <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
@@ -95,7 +95,7 @@
                         <mat-icon matSuffix>
                           <span class="material-icons">feedback</span>
                         </mat-icon>
-                        <textarea matInput type="text" [formControl]="formData.exper" placeholder="Experience" required></textarea>
+                        <textarea matInput type="text" [formControl]="formData.exper" placeholder="Experience" readonly></textarea>
                     </mat-form-field>
                 </div>
             </div>

@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         });
         localStorage.setItem('token', res.token)
         this._auth.onLogin();
-        this._router.navigate(['/employees'])
+        this._router.navigate(['/view'])
       },
       err => {
         if( err instanceof HttpErrorResponse ) {

@@ -3,6 +3,8 @@ import {Router} from '@angular/router'
 import {FormControl,Validators} from '@angular/forms';
 import { EmployeesService } from '../services/employees.service';
 import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 export class EmployeeComponent implements OnInit {
 
   form={userid:null,id:null,fname:null,lname:null,edu:null,salary:null,exper:null,phone:null,email:null,address:null,department:null}
-  constructor(private authService:AuthService,private router:Router,private employeesService:EmployeesService) {
+  constructor(private authService:AuthService,private router:Router,private employeesService:EmployeesService,private snackbar:MatSnackBar) {
     
   }
 
@@ -125,7 +127,39 @@ export class EmployeeComponent implements OnInit {
     this.form.address=this.formData.address.value;
     this.employeesService.addRecord(this.form).subscribe(
       (res)=>{
+        this.snackbar.open('Employee Added Successfully','OK',{
+          duration: 3000,
+        })
         this.router.navigate(['/view'])
+      },
+      err => {
+        if( err instanceof HttpErrorResponse ) {
+          if (err.status === 409) {
+            this.snackbar.open('Employee Id Already Exists', 'OK', {
+              duration: 3000,
+            });
+            this.formData.id.reset();
+            this.formData.fname.reset();
+            this.formData.lname.reset();
+            this.formData.salary.reset();
+            this.formData.edu.reset();
+            this.formData.exper.reset();
+            this.formData.phone.reset();
+            this.formData.email.reset();
+            this.formData.department.reset();
+            this.formData.address.reset();
+            this.form.id="";
+            this.form.fname="";
+            this.form.lname="";
+            this.form.salary="";
+            this.form.edu="";
+            this.form.exper="";
+            this.form.phone="";
+            this.form.email="";
+            this.form.department="";
+            this.form.address="";
+          }
+        }
       }
     );
   }

@@ -17,11 +17,11 @@
             <div fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap.gt-sm="20px">
                 <div>
                     <mat-form-field class="example">
-                        <mat-label>Fisrt Name</mat-label>
+                        <mat-label>First Name</mat-label>
                         <mat-icon matSuffix>
                             <i class="fa fa-user-circle" aria-hidden="true"></i>
                         </mat-icon>
-                        <input matInput type="text" [formControl]="formData.fname" placeholder="Fisrt Name" required>
+                        <input matInput type="text" [formControl]="formData.fname" placeholder="First Name" required>
                         <mat-error *ngIf="formData.fname.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -53,7 +53,7 @@
                         <mat-icon matSuffix>
                             <span class="material-icons">monetization_on</span>
                         </mat-icon>
-                        <input matInput type="text" [formControl]="formData.salary" placeholder="Salary" required>
+                        <input matInput type="number" [formControl]="formData.salary" placeholder="Salary" required>
                         <mat-error *ngIf="formData.salary.invalid">{{Msg()}}</mat-error>
                     </mat-form-field>
                 </div>
